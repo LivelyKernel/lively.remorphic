@@ -1,0 +1,29 @@
+{
+  "name": "lively.remorphic",
+  "version": "0.0.1",
+  "description": "An experimental reactive UI framework for Lively",
+  "main": "index.js",
+  "systemjs": {
+    "main": "./index.js",
+    "map": {
+      "lively.remorphic": "."
+    }
+  },
+  "lively": {
+    "main": "index.js",
+    "packageMap": {}
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LivelyKernel/lively.remorphic.git"
+  },
+  "author": "Christopher Schuster <cs@livoris.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LivelyKernel/lively.remorphic/issues"
+  },
+  "homepage": "https://github.com/LivelyKernel/lively.remorphic#readme"
+}
