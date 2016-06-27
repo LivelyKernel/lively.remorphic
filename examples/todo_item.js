@@ -8,6 +8,7 @@ export class Model {
 }
 
 class ToggleDone {
+  constructor(toggleAction) { this.checked = toggleAction.checked; }
   perform(model) {
     model.done = !model.done;
   }

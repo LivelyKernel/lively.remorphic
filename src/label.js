@@ -1,8 +1,7 @@
 // Model == string
 
 export function view(name = "") {
-  return lively.BuildSpec({
-    "class": "lively.morphic.Text",
-    "textString": name
-  });
+  const m = new lively.morphic.Text(lively.rect(0, 0, 120, 20), name);
+  m.beLabel();
+  return m;
 }

@@ -1,12 +1,14 @@
 // Model == boolean
 
-class ToggleCheck {}
+class ToggleCheck {
+  constructor(checked) { this.checked = checked; }
+}
 
 export const Actions = { ToggleCheck };
 
 export function view(checked = false) {
-  return lively.BuildSpec({
-    "class": "lively.morphic.CheckBox",
-    "onChange": (dispatch) => dispatch(new ToggleCheck())
-  });
+  const m = new lively.morphic.CheckBox(checked);
+  m.addScript(function doAction(v) { this.dispatch(new ToggleCheck(v)); });
+  lively.bindings.connect(m, "checked", m, "doAction");
+  return m;
 }

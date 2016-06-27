@@ -1,9 +1,7 @@
 // Model == Array<Components>
 
 export function view(components = []) {
-  return lively.BuildSpec({
-    "class": "lively.morphic.Morph",
-    "layouter": "lively.morphic.layout.HorizontalLayout",
-    "submorphs": components
-  });
+  const m = new lively.morphic.Morph();
+  m.setLayouter({type: 'horizontal'});
+  return m;
 }
