@@ -1,4 +1,9 @@
-import { button, text, checkbox, hbox } from '../index.js';
+// Example Use:
+//
+// import ReMorph from "lively.remorphic";
+// ReMorph("lively.remorphic/examples/todo_item.js").openInHand();
+
+import { Action, button, text, checkbox, hbox } from '../index.js';
 
 export class Model {
   constructor(name = "", done = false) {
@@ -7,26 +12,24 @@ export class Model {
   }
 }
 
-class ToggleDone {
-  constructor(toggleAction) { this.checked = toggleAction.checked; }
+class ToggleDone extends Action {
   perform(model) {
-    model.done = !model.done;
+    model.done = this.arg.checked;
   }
 }
-class Rename {
-  constructor(textAction) { this.str = textAction.str; }
+class Rename extends Action {
   perform(model) {
-    model.name = this.str;
+    model.name = this.arg.str;
   }
 }
-class Remove {}
+class Remove extends Action {}
 
 export const Actions = { ToggleDone, Rename, Remove };
 
 export function view(model, dispatch) {
   return hbox([
     checkbox.view(model.done).amap(ToggleDone),
-    text(model.name).amap(Rename),
-    button("×").amap(Remove)
+    text.view(model.name).amap(Rename),
+    button.view("×").amap(Remove)
   ]);
 }
