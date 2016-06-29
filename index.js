@@ -29,21 +29,29 @@ export class Action {
 // Morhpic extension
 import M from './src/morphic_ext';
 
-export default function ReMorph(moduleName, model) {
+export default async function ReMorph(moduleName, model) {
   // expects the module to have a "view" function
   // view : Model -> Morph
   // the Morph returned by the view should dispatch actions to owner
   // if "model" is omitted, instantiate default Model
   // returns a standard Morph for the ReMorphic module
-  const m = new lively.morphic.Morph();
-  System.import(moduleName).then(({Model,view}) => {
-    m.model = model || new Model();
-    m.addScript(function dispatch(action) {
-      action.perform(this.model);
-      this.removeAllMorphs();
-      this.addMorph(view(this.model));
-    }, 'dispatch', {view});
-    m.addMorph(view(m.model));
-  });
+  const m = new lively.morphic.Morph(),
+        s = lively.net.SessionTracker.getSession(),
+        url = `lively://${s.sessionId.replace(/:/g, "_COLON_")}/${m.id}`;
+  m.model = model;
+  m.name = m.id;
+  m.textString = `
+import {Model, view} from '${moduleName}';
+const m = $world.getMorphById('${m.id}');
+m.model = m.model || new Model();
+m.addScript(function dispatch(action) {
+  action.perform(this.model);
+  this.removeAllMorphs();
+  this.addMorph(view(this.model));
+}, 'dispatch', {view});
+m.addMorph(view(m.model));`;
+  $world.addMorph(m);
+  await System.import(url);
+  $world.removeMorph(m);
   return m;
 }

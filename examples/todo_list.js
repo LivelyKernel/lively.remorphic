@@ -1,7 +1,8 @@
 // Example Use:
 //
 // import ReMorph from "lively.remorphic";
-// ReMorph("lively.remorphic/examples/todo_list.js").openInHand();
+// const m = await ReMorph("lively.remorphic/examples/todo_list.js");
+// m.openInHand();
 
 import { Action, button, label, vbox, hbox, win } from '../index.js';
 import * as todoItem from './todo_item';
