@@ -10,7 +10,7 @@ export const Actions = { ToggleCheck };
 export function view(checked = false) {
   const ToggleCheck = Actions.ToggleCheck; //FIXME b/c of addScript
   const m = new lively.morphic.CheckBox(checked);
-  m.setExtent(lively.pt(20, 20));
+  m.setExtent(lively.pt(16, 16));
   m.addScript(function doAction(checked) {
     this.dispatch(new ToggleCheck(checked));
   }, 'doAction', {ToggleCheck});
