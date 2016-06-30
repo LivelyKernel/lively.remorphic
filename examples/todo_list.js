@@ -1,8 +1,7 @@
-// Example Use:
-//
-// import ReMorph from "lively.remorphic";
-// const m = await ReMorph("lively.remorphic/examples/todo_list.js");
-// m.openInHand();
+/*** Example Use: ***
+import ReMorph from "lively.remorphic";
+ReMorph("lively.remorphic/examples/todo_list.js").openInHand();
+***/
 
 import { Action, button, label, vbox, hbox, win } from '../index.js';
 import * as todoItem from './todo_item';
@@ -62,12 +61,13 @@ export function view(model, dispatch) {
     todoItem.view(todo).amap(ItemAction, idx));
   const panel = [
     label(`${model.left()} items left`),
-    button.view("Add Item").amap(Add),
+    button.view("Add").amap(Add),
     button.view("All").amap(ShowAll),
     button.view("Active").amap(ShowActive),
     button.view("Completed").amap(ShowCompleted)];
   if (model.hasCompleted()) {
     panel.push(button.view("Clear completed").amap(RemoveCompleted));
   }
-  return win("ToDo List", vbox(items.concat([hbox(panel)])));
+  const m = win("ToDo List", vbox(items.reverse().concat([hbox(panel)])));
+  return m.asViewOf("lively.remorphic/examples/todo_list.js");
 }

@@ -7,7 +7,7 @@ class TextChange extends Action {
 }
 export const Actions = { TextChange };
 
-export function view(name = "") {
+export function view(name = "text") {
   const TextChange = Actions.TextChange; //FIXME b/c of addScript
   const m = new lively.morphic.Text(lively.rect(0, 0, 120, 20), name);
   m.applyStyle({resizeWidth: true, resizeHeight: false});
@@ -16,5 +16,5 @@ export function view(name = "") {
     this.dispatch(new TextChange(str));
   }, 'doAction', {TextChange});
   lively.bindings.connect(m, "textString", m, "doAction");
-  return m;
+  return m.asViewOf("lively.remorphic/src/text.js");
 }

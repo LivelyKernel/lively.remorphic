@@ -1,8 +1,7 @@
-// Example Use:
-//
-// import ReMorph from "lively.remorphic";
-// const m = await ReMorph("lively.remorphic/examples/todo_item.js");
-// m.openInHand();
+/*** Example Use: ***
+import ReMorph from "lively.remorphic";
+ReMorph("lively.remorphic/examples/todo_item.js").openInHand();
+***/
 
 import { Action, button, text, checkbox, hbox } from '../index.js';
 
@@ -32,5 +31,5 @@ export function view(model, dispatch) {
     checkbox.view(model.done).amap(ToggleDone),
     text.view(model.name).amap(Rename),
     button.view("×").amap(Remove)
-  ]);
+  ]).asViewOf("lively.remorphic/examples/todo_item.js");
 }

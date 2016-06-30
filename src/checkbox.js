@@ -15,5 +15,5 @@ export function view(checked = false) {
     this.dispatch(new ToggleCheck(checked));
   }, 'doAction', {ToggleCheck});
   lively.bindings.connect(m, "checked", m, "doAction");
-  return m;
+  return m.asViewOf("lively.remorphic/src/checkbox.js");
 }
